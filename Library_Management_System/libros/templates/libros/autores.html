@@ -16,8 +16,21 @@
                     {% endif %}
                 </li>
             </ul>
-            <a class="btn btn-primary mt-2" href="{% url 'libros:update_autor' autor.id %}">Editar</a>
-            <a class="btn btn-primary mt-2" href="{% url 'libros:delete_autor' autor.id %}">Eliminar</a>
+            {% if request.user.is_authenticated%}
+                <a class="btn btn-primary link-underline-opacity-0" href="{% url ''libros:update_autor' autor.id  %}"
+                    style="text-align: center;">Editar</a>
+                {% if request.user.is_staff%}
+                <a class="btn btn-primary mt-2" href="{% url 'libros:delete_autor' autor.id %}">Eliminar</a>
+                {% else %}
+                <a href="#" class="btn btn-primary  disabled mt-2" tabindex="-1" aria-disabled="true"
+                    style="pointer-events: none;">Eliminar</a>
+                {%endif%}
+                {%else%}
+                <a href="#" class="btn btn-primary disabled" tabindex="-1" aria-disabled="true"
+                    style="pointer-events: none;">Editar</a>
+                <a href="#" class="btn btn-primary  disabled mt-2" tabindex="-1" aria-disabled="true"
+                    style="pointer-events: none;">Eliminar</a>
+                {%endif%}
         </div>
     </div>
     {% endfor %}
