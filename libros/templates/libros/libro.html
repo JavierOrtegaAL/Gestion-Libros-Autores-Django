@@ -1,0 +1,28 @@
+{% extends 'libros/inicio.html' %}
+{% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h1>{{libro.titulo}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h2>{{libro.autor}}</h2>
+            <h3>{{libro.fecha_publicacion}}</h3>
+            <p>{%if libro.disponible %}
+                Disponible
+                {% else %}
+                No Disponible
+                {% endif %}</p>
+        </div>
+
+        <div class="col-8">
+            <p>{{libro.descripcion}}</p>
+        </div>
+    </div>
+
+
+</div>
+
+{%endblock%}

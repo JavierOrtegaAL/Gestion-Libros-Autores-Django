@@ -1,0 +1,45 @@
+{% extends 'libros/inicio.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ autor.nombre }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4"><img src="{{autor.foto.url}}" alt="" style="width: 15rem; height: 15rem;"></div>
+        <div class="col-8">
+            <div class="row">
+                <h3>{{autor.nacionalidad}}</h3>
+            </div>
+            <div class="row">
+                <p>{{autor.descripcion}}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row ">
+        {%for libro in obras %}
+        <div class="col-md-4 mb-4 align-items-center">
+            <div class="card" style="width: 20rem; height: 12rem; margin:2em; text-align: center;">
+                <div class="card-header">
+                    {{libro.titulo}}
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{libro.autor}}</li>
+                    <li class="list-group-item">{{libro.fecha_publicacion}}</li>
+                    <li class="list-group-item">
+                        {%if libro.disponible %}
+                        Disponible
+                        {% else %}
+                        No Disponible
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

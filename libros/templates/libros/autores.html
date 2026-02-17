@@ -1,0 +1,25 @@
+{% extends 'libros/inicio.html' %}
+{%load static%}
+{% block content%}
+<div class="row">
+    {% for autor in autores %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header" style="text-align: center;">
+                <a class="btn btn-dark mt-2" href="{% url 'libros:autor' autor.id %}">{{ autor.nombre }}</a>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" style="text-align: center;">{{ autor.nacionalidad }}</li>
+                <li class="list-group-item">
+                    {% if autor.foto %}
+                    <img src="{{ autor.foto.url }}" class="img-thumbnail rounded mx-auto d-block" style="width: 20rem; height: 20rem;">
+                    {% endif %}
+                </li>
+            </ul>
+            <a class="btn btn-primary mt-2" href="{% url 'libros:update_autor' autor.id %}">Editar</a>
+            <a class="btn btn-primary mt-2" href="{% url 'libros:delete_autor' autor.id %}">Eliminar</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

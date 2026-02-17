@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libros</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            padding-bottom: 8.75rem;
+            padding-top: 8.75rem;
+        }
+    </style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="/">Inicio</a>
+
+        <button class="navbar-toggler" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav" 
+                aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <!-- Menú izquierdo -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'libros:lista' %}">Libros</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'libros:autores' %}">Autores</a></li>
+                {%if request.user.is_authenticated%}
+                <li class="nav-item"><a class="nav-link" href="{% url 'libros:crear_libro' %}" >Crear Libro</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'libros:crear_autor' %}" >Crear Autor</a></li>
+                {%else%}
+                <li class="nav-item"><a class="nav-link disabled" tabindex="-1"
+                    aria-disabled="true" style="pointer-events: none;" href="#" >Crear Libro</a></li>
+                <li class="nav-item"><a class="nav-link disabled" tabindex="-1"
+                    aria-disabled="true" style="pointer-events: none;"href="#" >Crear Autor</a></li>
+                {%endif%}
+                
+            </ul>
+
+            <!-- Dropdown derecho -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+
+                        {% if request.user.is_authenticated %}
+                            {{ request.user.username }}
+                        {% else %}
+                            Cuenta
+                        {% endif %}
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+
+                        {% if not request.user.is_authenticated %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Acceder</a></li>
+                            <li><a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a></li>
+                        {% else %}
+                            <li>
+                                <form method="post" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item">
+                                        Salir
+                                    </button>
+                                </form>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+    <h1 class="text-center h1 pb-3">Sistema de Manejo de Libreria</h1>
+    <main class="container mt-4 pb-5 justify-content-center align-items-center pb-5">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="fixed-bottom bg-light py-3">
+        <h4>
+            Creado por:
+        </h4>
+        <h5 class="d-flex justify-content-center align-items-center ">Javier Ortega Alvarez de Lara
+        </h5>
+        <p class=" d-flex justify-content-center align-items-center">Guardados los derechos de &copy;.
+        </p>
+        <a href="/" class="btn btn-primary d-flex justify-content-center align-items-center">Inicio</a>
+    </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
