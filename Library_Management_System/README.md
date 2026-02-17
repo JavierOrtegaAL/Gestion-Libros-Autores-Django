@@ -33,5 +33,5 @@ Permite gestionar información de manera eficiente mediante una interfaz web mod
 ### 1️⃣ Clonar el repositorio
 
 ```bash
-git clone https://github.com/tuusuario/tu-repositorio.git
+git clone https://github.com/tuusuario/tu-repositorio.git](https://github.com/JavierOrtegaAL/Gestion-Libros-Autores-Django.git
 cd tu-repositorio
